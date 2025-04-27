@@ -33,14 +33,14 @@ export default function Learning() {
     {
       name: "LeetCode",
       icon: <SiLeetcode className="h-6 w-6" />,
-      url: "https://leetcode.com/mohebullamiazi/",
+      url: "https://leetcode.com/u/IwpQKDJgQB/",
       username: "mohebullamiazi",
     },
     {
       name: "HackerRank",
       icon: <SiHackerrank className="h-6 w-6" />,
-      url: "https://www.hackerrank.com/mohebullamiazi",
-      username: "mohebullamiazi",
+      url: "https://www.hackerrank.com/profile/mohibullamiazi",
+      username: "mohibullamiazi",
     },
     {
       name: "Codeforces",
