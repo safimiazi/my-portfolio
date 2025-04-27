@@ -1,5 +1,5 @@
-import Link from "next/link"
-import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa"
+import Link from "next/link";
+import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 export default function Footer() {
   return (
@@ -13,7 +13,7 @@ export default function Footer() {
           </div>
           <div className="flex space-x-4">
             <Link
-              href="https://github.com/mohebullamiazi"
+              href="https://github.com/safimiazi"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-600 dark:text-gray-400 hover:text-primary transition-colors"
@@ -22,7 +22,7 @@ export default function Footer() {
               <span className="sr-only">GitHub</span>
             </Link>
             <Link
-              href="https://linkedin.com/in/mohebullamiazi"
+              href="https://www.linkedin.com/in/shafimiazi/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-600 dark:text-gray-400 hover:text-primary transition-colors"
@@ -30,18 +30,10 @@ export default function Footer() {
               <FaLinkedin className="h-5 w-5" />
               <span className="sr-only">LinkedIn</span>
             </Link>
-            <Link
-              href="https://twitter.com/mohebullamiazi"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-600 dark:text-gray-400 hover:text-primary transition-colors"
-            >
-              <FaTwitter className="h-5 w-5" />
-              <span className="sr-only">Twitter</span>
-            </Link>
+         
           </div>
         </div>
       </div>
     </footer>
-  )
+  );
 }

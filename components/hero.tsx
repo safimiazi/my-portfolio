@@ -1,55 +1,59 @@
-"use client"
+"use client";
 
-import { useEffect, useRef } from "react"
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { Download, Send } from "lucide-react"
-import { FaGithub, FaLinkedin } from "react-icons/fa"
-import Typewriter from "typewriter-effect"
-import Link from "next/link"
+import { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Download, Send } from "lucide-react";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import Typewriter from "typewriter-effect";
+import Link from "next/link";
 
 export default function Hero() {
-  const sectionRef = useRef<HTMLElement>(null)
+  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible")
+            entry.target.classList.add("is-visible");
           }
-        })
+        });
       },
-      { threshold: 0.1 },
-    )
+      { threshold: 0.1 }
+    );
 
-    const elements = document.querySelectorAll(".animate-on-scroll")
-    elements.forEach((el) => observer.observe(el))
+    const elements = document.querySelectorAll(".animate-on-scroll");
+    elements.forEach((el) => observer.observe(el));
 
     return () => {
-      elements.forEach((el) => observer.unobserve(el))
-    }
-  }, [])
+      elements.forEach((el) => observer.unobserve(el));
+    };
+  }, []);
 
   const scrollToContact = () => {
-    const contactSection = document.querySelector("#contact")
+    const contactSection = document.querySelector("#contact");
     if (contactSection) {
-      contactSection.scrollIntoView({ behavior: "smooth" })
+      contactSection.scrollIntoView({ behavior: "smooth" });
     }
-  }
+  };
 
   const downloadResume = () => {
     // Create a link to the resume file and trigger download
-    const link = document.createElement("a")
-    link.href = "/mohebulla-miazi-resume.pdf" // Path to your resume file
-    link.download = "Mohebulla-Miazi-Resume.pdf"
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
-  }
+    const link = document.createElement("a");
+    link.href = "/mohebulla-miazi-resume.pdf"; // Path to your resume file
+    link.download = "Mohebulla-Miazi-Resume.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
-    <section id="home" ref={sectionRef} className="min-h-screen flex items-center justify-center pt-16 section-padding">
+    <section
+      id="home"
+      ref={sectionRef}
+      className="min-h-screen flex items-center justify-center pt-16 section-padding"
+    >
       <div className="container-custom text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -74,6 +78,14 @@ export default function Hero() {
           >
             MERN Stack Developer
           </motion.h2>
+          <motion.p
+            className=" text-sm text-gray-700 dark:text-gray-300"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.7, delay: 0.4 }}
+          >
+            Competitive Programmer
+          </motion.p>
 
           <motion.div
             className="text-lg md:text-xl font-medium text-primary h-8"
@@ -83,7 +95,14 @@ export default function Hero() {
           >
             <Typewriter
               options={{
-                strings: ["TypeScript", "JavaScript", "React.js", "Node.js", "MongoDB", "Express.js"],
+                strings: [
+                  "TypeScript",
+                  "JavaScript",
+                  "React.js",
+                  "Node.js",
+                  "MongoDB",
+                  "Express.js",
+                ],
                 autoStart: true,
                 loop: true,
               }}
@@ -100,7 +119,11 @@ export default function Hero() {
               <Send className="h-4 w-4" />
               Hire Me
             </Button>
-            <Button variant="outline" className="gap-2" onClick={downloadResume}>
+            <Button
+              variant="outline"
+              className="gap-2"
+              onClick={downloadResume}
+            >
               <Download className="h-4 w-4" />
               Download Resume
             </Button>
@@ -112,7 +135,11 @@ export default function Hero() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.7, delay: 1 }}
           >
-            <Link href="https://github.com/mohebullamiazi" target="_blank" rel="noopener noreferrer">
+            <Link
+              href="https://github.com/safimiazi"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Button
                 variant="ghost"
                 size="icon"
@@ -122,7 +149,11 @@ export default function Hero() {
                 <span className="sr-only">GitHub</span>
               </Button>
             </Link>
-            <Link href="https://linkedin.com/in/mohebullamiazi" target="_blank" rel="noopener noreferrer">
+            <Link
+              href="https://www.linkedin.com/in/shafimiazi/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Button
                 variant="ghost"
                 size="icon"
@@ -136,5 +167,5 @@ export default function Hero() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

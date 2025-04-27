@@ -61,7 +61,7 @@ export default function About() {
                 <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 blur-lg opacity-70 animate-pulse"></div>
                 <div className="relative h-full w-full rounded-full overflow-hidden border-4 border-white dark:border-gray-800">
                   <Image
-                    src="/placeholder.svg?height=320&width=320"
+                    src="/my-photo.png"
                     alt="Mohebulla Miazi"
                     width={320}
                     height={320}
