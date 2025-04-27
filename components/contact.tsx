@@ -19,7 +19,6 @@ export default function Contact() {
     message: string | null
   }>({ type: null, message: null })
 
-  const formRef = useRef<HTMLFormElement>(null)
   const sectionRef = useRef<HTMLElement>(null)
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 })
 
@@ -38,40 +37,51 @@ export default function Contact() {
     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault()
     setIsSubmitting(true)
     setFormStatus({ type: null, message: null })
-
-    if (!formRef.current) return
-
+  
+    // Collect form data using FormData API
+    const formData = {
+      name: e.target.name.value,
+      email: e.target.email.value,
+      message: e.target.message.value,
+    }
+  
+    console.log("Form data:", formData)
+  
     try {
-      // FormSubmit handles the form submission directly
-      const form = formRef.current
-      const formData = new FormData(form)
-
-      // Submit the form directly - FormSubmit will handle the rest
-      form.submit()
-
-      // Show success message immediately
-      // Note: Since we're submitting the form directly, we won't actually reach this code
-      // but we'll keep it for reference
-      setFormStatus({
-        type: "success",
-        message: "Message sent successfully! I will get back to you soon.",
+      // Send the form data to the API using a POST request
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
       })
-
-      toast({
-        title: "Message sent!",
-        description: "Thanks for reaching out. I'll get back to you soon.",
-      })
+  
+      const result = await response.json()
+  
+      if (response.ok) {
+        setFormStatus({
+          type: "success",
+          message: "Message sent successfully! I will get back to you soon.",
+        })
+        toast({
+          title: "Message sent!",
+          description: "Thanks for reaching out. I'll get back to you soon.",
+        })
+      } else {
+        throw new Error(result.error || "Something went wrong.")
+      }
     } catch (error) {
       console.error("Error sending email:", error)
       setFormStatus({
         type: "error",
         message: "Failed to send message. Please try again later.",
       })
-
+  
       toast({
         title: "Error sending message",
         description: "Please try again or contact me directly via email.",
@@ -81,6 +91,8 @@ export default function Contact() {
       setIsSubmitting(false)
     }
   }
+  
+  
 
   return (
     <section id="contact" ref={sectionRef} className="section-padding">
@@ -143,9 +155,8 @@ export default function Contact() {
               <Card className="glass-card overflow-hidden border-0">
                 <CardContent className="p-6">
                   <form
-                    ref={formRef}
-                    action="https://formsubmit.co/mohibullamiazi@gmail.com"
-                    method="POST"
+                    onSubmit={handleSubmit}
+                    
                     className="space-y-4"
                   >
                     {/* FormSubmit configuration */}
@@ -212,7 +223,30 @@ export default function Contact() {
 
                     <Button type="submit" className="w-full gap-2">
                       <Send className="h-4 w-4" />
-                      Send Message
+                     
+                      {isSubmitting ? "Sending..." : "Send Message"}
+                      {isSubmitting && (
+                      //  give me spiner
+                      <svg
+                        className="animate-spin h-4 w-4 ml-2 text-white"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      > 
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 1 1 16 0A8 8 0 0 1 4 12zm2.5-1h9a2.5 2.5 0 1 0-9 0z"
+                        ></path>
+                      </svg>
+                      )}
                     </Button>
                   </form>
                 </CardContent>
