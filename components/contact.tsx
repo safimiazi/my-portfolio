@@ -49,7 +49,6 @@ export default function Contact() {
       message: e.target.message.value,
     }
   
-    console.log("Form data:", formData)
   
     try {
       // Send the form data to the API using a POST request
